@@ -1,8 +1,8 @@
 # TF-serving
 
-TensorFlow Serving with Docker
+# TensorFlow Serving with Docker
 TensorFlow Serving is a flexible, high-performance serving system for machine learning models, designed for production environments. It deals with the inference aspect of machine learning, taking models after training and managing their lifetimes, providing clients with versioned access via a high-performance, reference-counted lookup table. TensorFlow Serving provides out-of-the-box integration with TensorFlow models, but can be easily extended to serve other types of models and data.
-To note a few features:
+  To note a few features:
 Can serve multiple models, or multiple versions of the same model simultaneously
 Exposes both gRPC as well as HTTP inference endpoints
 Allows deployment of new model versions without changing any client code
@@ -10,7 +10,8 @@ Supports canarying new versions and A/B testing experimental models
 Adds minimal latency to inference time due to efficient, low-overhead implementation
 Features a scheduler that groups individual inference requests into batches for joint execution on GPU, with configurable latency controls
 Supports many servables: Tensorflow models, embeddings, vocabularies, feature transformations and even non-Tensorflow-based machine learning models
-Build it from Scratch
+
+# Build it from Scratch
 The below mentioned steps need to be followed after exporting the tensorflow model to desired location. The location used in the below commands is ‘./saved_model/1’.
 Step1: Download the TensorFlow Serving Docker image
 For CPU serving:
@@ -27,7 +28,7 @@ docker run -p 8501:8501 --name tfserving_resnet  --mount type=bind, source=/home
 For GPU:
 docker run --gpus all -p 8501:8501 --name tfserving_resnet  --mount type=bind, source=/home/jupyter/saved_model, target=/models/resnet  -e MODEL_NAME=resnet -t tensorflow/serving:latest-gpu &
 
-Breaking down the command line arguments:
+# Breaking down the command line arguments:
 -p 8501:8501 : Publishing the container’s port 8501 (where TF Serving responds to REST API requests) to the host’s port 8501
 --name tfserving_resnet : Giving the container we are creating the name “tfserving_resnet” so we can refer to it later
 --mount type=bind, source=/home/jupyter/saved_model, target=/models/resnet : Mounting the host’s local directory (/home/jupyter/saved_model) on the container (/models/resnet) so TF Serving can read the model from inside the container.

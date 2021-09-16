@@ -30,10 +30,10 @@ docker run -p 8527:8527 \
 --mount type=bind,source=/home/jupyter/saved_model,target=/models/embeddings \
 -e MODEL_NAME=embeddings -t tensorflow/serving &
 
-docker run -p 8501:8501 --name tfserving_resnet  --mount type=bind, source=/home/jupyter/saved_model, target=/models/resnet  -e MODEL_NAME=resnet -t tensorflow/serving &
+docker run -p 8501:8501 --name tfserving_resnet  --mount type=bind,source=/home/jupyter/saved_model,target=/models/resnet  -e MODEL_NAME=resnet -t tensorflow/serving &
 
 For GPU:
-docker run --gpus all -p 8501:8501 --name tfserving_resnet  --mount type=bind, source=/home/jupyter/saved_model, target=/models/resnet  -e MODEL_NAME=resnet -t tensorflow/serving:latest-gpu &
+docker run --gpus all -p 8501:8501 --name tfserving_resnet  --mount type=bind,source=/home/jupyter/saved_model, target=/models/resnet  -e MODEL_NAME=resnet -t tensorflow/serving:latest-gpu &
 
 ## Breaking down the command line arguments:
 -p 8501:8501 : Publishing the container’s port 8501 (where TF Serving responds to REST API requests) to the host’s port 8501
